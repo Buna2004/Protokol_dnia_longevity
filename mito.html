@@ -1,130 +1,318 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<meta charset="UTF-8" />
-<title>MITO MORNING – Polish Biohacker</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="MITO MORNING – czysta energia komórkowa, fokus i wsparcie mitochondriów bez kofeinowego zjazdu." />
+  <meta charset="UTF-8" />
+  <title>MITO MORNING – Polish Biohacker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="MITO MORNING – poranna energia bez kofeiny. Zapisz się na pierwszą serię (limit 500)." />
 
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PMQ6Q08V37"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-PMQ6Q08V37');
-</script>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PMQ6Q08V37"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PMQ6Q08V37');
+  </script>
 
-<style>
-body{
-margin:0;
-font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-background:#020b0a;
-color:#e9fff3;
-line-height:1.6;
-}
-
-.container{
-max-width:900px;
-margin:0 auto;
-padding:40px 20px;
-}
-
-h1{
-font-size:42px;
-margin-bottom:10px;
-color:#00ff7a;
-text-shadow:0 0 15px rgba(0,255,122,.3);
-}
-
-h2{
-margin-top:40px;
-font-size:22px;
-color:#00ff7a;
-}
-
-p{
-color:#bfffe0;
-}
-
-.section{
-background:#071513;
-padding:25px;
-border-radius:18px;
-margin-bottom:25px;
-border:1px solid rgba(0,255,122,.2);
-}
-
-.btn{
-display:inline-block;
-margin-top:20px;
-padding:14px 22px;
-background:#00ff7a;
-color:#002d18;
-font-weight:700;
-border-radius:12px;
-text-decoration:none;
-}
-
-.btn:hover{
-background:#00cc64;
-}
-
-ul{
-color:#bfffe0;
-}
-
-.small{
-font-size:13px;
-color:#89cdb1;
-margin-top:10px;
-}
-</style>
+  <style>
+    :root{
+      --bg:#020b0a;
+      --panel:#061413;
+      --panel2:#071b18;
+      --text:#eafff3;
+      --muted:#a7d7c0;
+      --green:#00ff7a;
+      --green2:#00cc64;
+      --line:rgba(0,255,122,.22);
+      --shadow:0 18px 60px rgba(0,0,0,.60);
+      --r:18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 50% -40%, rgba(0,255,122,.18), transparent 60%),
+        radial-gradient(800px 480px at 10% 10%, rgba(0,255,122,.10), transparent 60%),
+        var(--bg);
+      line-height:1.6;
+    }
+    a{color:inherit}
+    .wrap{max-width:1050px;margin:0 auto;padding:22px 16px 80px}
+    .top{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;
+    }
+    .brand{display:flex;align-items:center;gap:10px}
+    .dot{width:10px;height:10px;border-radius:50%;background:var(--green);box-shadow:0 0 18px rgba(0,255,122,.75)}
+    .brand b{letter-spacing:.3px}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 12px;border:1px solid var(--line);
+      border-radius:999px;background:rgba(0,255,122,.06);
+      font-size:13px;color:var(--muted);
+      backdrop-filter: blur(6px);
+    }
+    .grid{display:grid;grid-template-columns:1.15fr .85fr;gap:16px;align-items:start}
+    @media (max-width:920px){.grid{grid-template-columns:1fr}}
+    .card{
+      border:1px solid var(--line);
+      border-radius:var(--r);
+      background:linear-gradient(180deg, rgba(0,255,122,.07), transparent 55%), var(--panel);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    .hero{
+      padding:22px;
+      background:
+        radial-gradient(700px 300px at 20% 0%, rgba(0,255,122,.13), transparent 60%),
+        linear-gradient(180deg, rgba(0,255,122,.08), transparent 50%),
+        var(--panel);
+    }
+    h1{
+      margin:10px 0 10px;
+      font-size:46px;line-height:1.04;
+      letter-spacing:.2px;
+      text-shadow:0 0 20px rgba(0,255,122,.18);
+    }
+    @media(max-width:520px){h1{font-size:38px}}
+    .accent{color:var(--green);text-shadow:0 0 24px rgba(0,255,122,.35)}
+    .sub{margin:0 0 14px;color:var(--muted);font-size:16px}
+    .bullets{margin:0;padding-left:18px;color:#c9ffe6}
+    .bullets li{margin:6px 0}
+    .hr{height:1px;background:var(--line);margin:16px 0}
+    .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+    @media (max-width:600px){.kpis{grid-template-columns:1fr}}
+    .kpi{
+      padding:12px;border:1px solid var(--line);border-radius:16px;background:rgba(0,0,0,.16)
+    }
+    .kpi b{display:block;font-size:18px;margin-bottom:2px}
+    .kpi small{color:var(--muted)}
+    .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      padding:12px 14px;border-radius:14px;border:1px solid var(--line);
+      text-decoration:none;font-weight:800;cursor:pointer;
+    }
+    .btn.primary{
+      background:linear-gradient(90deg, rgba(0,255,122,.95), rgba(0,204,100,.95));
+      color:#001a0d;border:none;
+      box-shadow:0 0 30px rgba(0,255,122,.24);
+    }
+    .btn.ghost{background:rgba(255,255,255,.02)}
+    .badge{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:10px 12px;border-radius:14px;border:1px solid var(--line);
+      background:rgba(0,0,0,.20);color:#c9ffe6;font-size:13px;
+    }
+    .cta{
+      position:sticky;top:14px;
+      background:linear-gradient(180deg, rgba(0,255,122,.09), transparent 50%), var(--panel2);
+    }
+    .cta h2{margin:8px 0 8px;font-size:22px}
+    .price{
+      display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:10px 0 6px
+    }
+    .price b{font-size:24px;color:var(--green)}
+    .price small{color:var(--muted)}
+    .limit{
+      padding:10px 12px;border-radius:14px;border:1px solid var(--line);
+      background:rgba(0,255,122,.06);color:#c9ffe6;font-weight:700;
+    }
+    .input{
+      width:100%;padding:12px 12px;border-radius:14px;border:1px solid var(--line);
+      background:rgba(0,0,0,.25);color:var(--text);outline:none;
+      margin:10px 0 10px;
+    }
+    .input::placeholder{color:rgba(167,215,192,.75)}
+    .mini{font-size:12px;color:var(--muted);margin-top:8px}
+    .fine{font-size:12px;color:var(--muted)}
+    .secTitle{margin:0 0 10px;font-size:18px;color:var(--green)}
+    .tags{margin-top:8px}
+    .tag{display:inline-block;padding:6px 10px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:12px;margin:6px 6px 0 0}
+    .faq details{
+      border:1px solid var(--line);border-radius:16px;padding:12px;background:rgba(0,0,0,.14);margin-bottom:10px
+    }
+    .faq summary{cursor:pointer;font-weight:800}
+    .faq p{color:var(--muted);margin:8px 0 0}
+    .social{
+      display:grid;grid-template-columns:1fr 1fr;gap:10px
+    }
+    @media (max-width:700px){.social{grid-template-columns:1fr}}
+  </style>
 </head>
 
 <body>
-<div class="container">
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">
+        <div class="dot"></div>
+        <b>Polish Biohacker</b>
+        <span class="pill">Test popytu • pierwsza seria</span>
+      </div>
+      <a class="btn ghost" href="./index.html">Powrót</a>
+    </div>
 
-<h1>MITO MORNING</h1>
-<p>Poranny stack dla ludzi, którzy chcą stabilnej energii, skupienia i realnego wsparcia metabolizmu komórkowego – bez agresywnego pobudzenia.</p>
+    <div class="grid">
+      <!-- LEFT -->
+      <div class="card hero" id="top">
+        <span class="pill">Bez kofeiny • bez jittera • bez zjazdu</span>
+        <h1>
+          <span class="accent">MITO MORNING</span><br>
+          Poranna energia jak „upgrade systemu”
+        </h1>
+        <p class="sub">
+          Jeśli kawa robi z Ciebie rollercoaster, to to jest dla Ciebie.
+          MITO MORNING ma dawać <b>czystą energię</b>, <b>focus</b> i <b>spokojną moc</b> —
+          bez agresywnego pobudzenia.
+        </p>
 
-<div class="section">
-<h2>Co daje MITO MORNING?</h2>
-<ul>
-<li>Stabilna energia bez „zjazdu”</li>
-<li>Lepsza koncentracja i klarowność myślenia</li>
-<li>Wsparcie mitochondriów i metabolizmu energii</li>
-<li>Lepsze wejście w dzień, trening i pracę umysłową</li>
-</ul>
-</div>
+        <div class="btnrow">
+          <a class="btn primary" href="#signup" onclick="gtag('event','cta_click',{label:'hero_signup'})">Wchodzę w 1. serię</a>
+          <a class="btn ghost" href="#formula" onclick="gtag('event','cta_click',{label:'hero_formula'})">Skład i działanie</a>
+          <span class="badge">⏱ 30 dni testu • potem decyzja o produkcji</span>
+        </div>
 
-<div class="section">
-<h2>Skład (wersja robocza – do konsultacji technologicznej)</h2>
-<ul>
-<li>Acetyl-L-karnityna (ALCAR)</li>
-<li>L-tyrozyna</li>
-<li>Tauryna</li>
-<li>TMG (betaina) – wsparcie metylacji i produkcji energii</li>
-<li>Kompleks witamin B (aktywne formy, m.in. B6 jako P-5-P)</li>
-<li>Elektrolity (np. sód / magnez)</li>
-</ul>
-<p class="small">Finalne dawki zostaną doprecyzowane po konsultacji z producentem (rozpuszczalność, smak, stabilność).</p>
-</div>
+        <div class="kpis">
+          <div class="kpi"><b>~50 porcji</b><small>250 g puszka</small></div>
+          <div class="kpi"><b>Rano</b><small>energia + koncentracja</small></div>
+          <div class="kpi"><b>Limit</b><small>pierwsza partia 500 szt.</small></div>
+        </div>
 
-<div class="section">
-<h2>Pierwsza seria</h2>
-<p>Limitowana partia testowa. Zbieramy listę zainteresowanych przed startem produkcji.</p>
+        <div class="hr"></div>
 
-<a class="btn" 
-href="PASTE_TUTAJ_LINK_DO_GOOGLE_FORMS" 
-target="_blank"
-onclick="gtag('event','lead_click',{label:'mito_morning_signup'})">
-Zapisz się na pierwszą serię
-</a>
+        <div id="formula">
+          <div class="secTitle">Co to robi w praktyce?</div>
+          <ul class="bullets">
+            <li><b>Stabilna energia</b> bez kawowego „piku i zjazdu”</li>
+            <li><b>Focus</b> i „czysta głowa” do pracy/treningu</li>
+            <li><b>Wsparcie metabolizmu energii</b> (mitochondrialnie i nerwowo)</li>
+            <li><b>Lepszy start dnia</b> bez wkur*** i rozjazdu emocji</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Praca umysłowa</span>
+            <span class="tag">Trening rano</span>
+            <span class="tag">30+ stres</span>
+            <span class="tag">Biohacking basic</span>
+            <span class="tag">Bez kofeiny</span>
+          </div>
+          <p class="fine" style="margin-top:10px;">
+            *Suplement diety. Nie jest lekiem. Efekty zależą od stylu życia.
+          </p>
+        </div>
 
-<p class="small">Zostaw mail, aby otrzymać informację o cenie i starcie przedsprzedaży.</p>
-</div>
+        <div class="hr"></div>
 
-</div>
+        <div class="secTitle">Skład (wersja robocza – dopięcie z technologiem)</div>
+        <ul class="bullets">
+          <li>Acetyl-L-karnityna (ALCAR)</li>
+          <li>L-tyrozyna</li>
+          <li>Tauryna</li>
+          <li><b>TMG (betaina)</b> – wsparcie metylacji i produkcji energii</li>
+          <li>Kompleks witamin B (aktywne formy, m.in. B6 jako P-5-P)</li>
+          <li>Elektrolity (np. sód / magnez)</li>
+        </ul>
+        <p class="fine">
+          Finalne dawki doprecyzujemy po konsultacji z producentem (smak, rozpuszczalność, stabilność).
+        </p>
+
+        <div class="hr"></div>
+
+        <div class="social">
+          <div class="card" style="padding:14px;background:rgba(0,0,0,.14)">
+            <div class="secTitle">Dlaczego to ma sens?</div>
+            <p class="sub" style="margin:0">
+              Bo ludzie są przemęczeni i jadą na dopaminie z kawy.
+              MITO MORNING to ma być <b>sprawczość</b>, a nie stymulacja.
+            </p>
+          </div>
+          <div class="card" style="padding:14px;background:rgba(0,0,0,.14)">
+            <div class="secTitle">Co dostaniesz jako pierwszy?</div>
+            <p class="sub" style="margin:0">
+              Mail z ceną, startem przedsprzedaży, i możliwością wejścia w 1. serię.
+              Bez spamu.
+            </p>
+          </div>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="faq">
+          <div class="secTitle">FAQ</div>
+
+          <details>
+            <summary>Czy to jest pre-workout?</summary>
+            <p>Nie. To poranny stack na stabilną energię i koncentrację. Ma działać czysto, bez agresji.</p>
+          </details>
+
+          <details>
+            <summary>Czy będzie kofeina?</summary>
+            <p>Celowo nie. MITO MORNING ma być bez kawowego pobudzenia. Performance kiedyś może powstać osobno.</p>
+          </details>
+
+          <details>
+            <summary>Po co zapis, skoro produkt jeszcze nie istnieje?</summary>
+            <p>Bo to jest test popytu. Jeśli zbierzemy odpowiednią liczbę osób — robimy produkcję i przedsprzedaż.</p>
+          </details>
+
+          <details>
+            <summary>Jaka cena?</summary>
+            <p>Szacunkowo <b>229–249 zł</b> za 250 g / ~50 porcji. Final po wycenie produkcji.</p>
+          </details>
+        </div>
+      </div>
+
+      <!-- RIGHT CTA -->
+      <div class="card cta" id="signup">
+        <span class="pill">Pierwsza seria • lista chętnych</span>
+
+        <div class="price">
+          <b>229–249 zł</b>
+          <small>szacunek • final po wycenie</small>
+        </div>
+
+        <div class="limit">LIMIT: 500 szt. (pierwsza partia testowa)</div>
+
+        <h2>Zostaw maila</h2>
+        <p class="sub" style="margin:0 0 8px;">
+          Dostaniesz info o starcie przedsprzedaży. To jest jedyny cel tej strony.
+        </p>
+
+        <!-- FORM: Formspree (działa na GitHub Pages) -->
+        <form action="PASTE_YOUR_FORMSPREE_ENDPOINT" method="POST"
+              onsubmit="gtag('event','lead_submit',{label:'mito_morning_form'});">
+          <input class="input" type="email" name="email" placeholder="Twój e-mail" required />
+          <input type="hidden" name="source" value="MITO_MORNING_LANDING" />
+          <button class="btn primary" type="submit" style="width:100%;">
+            Zapisuję się (pierwsza seria)
+          </button>
+        </form>
+
+        <div class="mini">
+          Jeśli po kliknięciu nie działa, to znaczy że nie wkleiłeś endpointu z Formspree.
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="secTitle">Kiedy decyzja?</div>
+        <ul class="bullets">
+          <li>Zbieramy zapisy</li>
+          <li>Dopinamy recepturę i wycenę</li>
+          <li>Start przedsprzedaży</li>
+        </ul>
+
+        <div class="fine" style="margin-top:10px;">
+          *Zapis = zainteresowanie. Potem podejmujesz decyzję o zakupie.
+        </div>
+
+        <div class="hr"></div>
+
+        <a class="btn ghost" href="#top" onclick="gtag('event','cta_click',{label:'back_to_top'})" style="width:100%;">
+          Wróć na górę
+        </a>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
