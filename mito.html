@@ -294,15 +294,22 @@ document.getElementById("mitoForm").addEventListener("submit", async function(e)
 
   const form = e.target;
 
-  const response = await fetch("https://formspree.io/f/xxkovanpj", {
-    method: "POST",
-    body: new FormData(form)
-  });
+  try {
+    const response = await fetch("https://formspree.io/f/xxkovanpj", {
+      method: "POST",
+      headers: { "Accept": "application/json" },
+      body: new FormData(form)
+    });
 
-  if(response.ok){
-    window.location.href = "./dziekuje.html";
-  } else {
-    alert("Błąd wysyłki. Spróbuj ponownie.");
+    const text = await response.text(); // pokaże co Formspree zwraca
+
+    if(response.ok){
+      window.location.href = "./dziekuje.html";
+    } else {
+      alert("Formspree błąd: " + response.status + "\n" + text);
+    }
+  } catch (err) {
+    alert("Fetch error: " + err);
   }
 });
 </script>
