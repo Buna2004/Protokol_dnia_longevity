@@ -280,10 +280,9 @@
         </p>
 
         <!-- FORM: Formspree (działa na GitHub Pages) -->
-        <form id="mitoForm">
+       <form id="mitoForm">
   <input class="input" type="email" name="email" placeholder="Twój e-mail" required />
   <input type="hidden" name="source" value="MITO_MORNING_LANDING" />
-
   <button class="btn primary" type="submit" style="width:100%;">
     Zapisuję się (pierwsza seria)
   </button>
@@ -294,16 +293,14 @@ document.getElementById("mitoForm").addEventListener("submit", async function(e)
   e.preventDefault();
 
   const form = e.target;
-  const data = new FormData(form);
 
   const response = await fetch("https://formspree.io/f/xxkovanpj", {
     method: "POST",
-    body: data,
-    headers: { 'Accept': 'application/json' }
+    body: new FormData(form)
   });
 
   if(response.ok){
-    window.location.href = "https://buna2004.github.io/Protokol_dnia_longevity/dziekuje.html";
+    window.location.href = "./dziekuje.html";
   } else {
     alert("Błąd wysyłki. Spróbuj ponownie.");
   }
