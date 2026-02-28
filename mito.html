@@ -1,246 +1,130 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <title>MITO MORNING – Polish Biohacker</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="MITO MORNING – czysta energia komórkowa bez kawowego pobudzenia. Zapisz się na pierwszą serię." />
+<meta charset="UTF-8" />
+<title>MITO MORNING – Polish Biohacker</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="MITO MORNING – czysta energia komórkowa, fokus i wsparcie mitochondriów bez kofeinowego zjazdu." />
 
-  <!-- Google tag (gtag.js) - zostaw jak masz -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PMQ6Q08V37"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-PMQ6Q08V37');
-  </script>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PMQ6Q08V37"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-PMQ6Q08V37');
+</script>
 
-  <style>
-    :root{
-      --bg:#020b0a;
-      --panel:#071513;
-      --text:#e9fff3;
-      --muted:#a7d7c0;
-      --green:#00ff7a;
-      --green2:#00cc64;
-      --line:rgba(0,255,122,.20);
-      --shadow: 0 20px 60px rgba(0,0,0,.55);
-      --radius:18px;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: radial-gradient(1200px 600px at 50% -50%, rgba(0,255,122,.18), transparent 55%),
-                  radial-gradient(900px 500px at 10% 0%, rgba(0,255,122,.10), transparent 60%),
-                  var(--bg);
-      color:var(--text);
-      line-height:1.6;
-    }
-    a{color:inherit}
-    .wrap{max-width:980px;margin:0 auto;padding:22px 16px 80px}
-    .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
-    .brand{display:flex;align-items:center;gap:10px;opacity:.95}
-    .dot{width:10px;height:10px;border-radius:50%;background:var(--green);box-shadow:0 0 18px rgba(0,255,122,.75)}
-    .brand b{letter-spacing:.4px}
-    .pill{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:8px 12px;border:1px solid var(--line);border-radius:999px;
-      background:rgba(0,255,122,.06);
-      font-size:13px;color:var(--muted);
-    }
-    .grid{display:grid;grid-template-columns:1.15fr .85fr;gap:16px;align-items:start}
-    @media (max-width:900px){.grid{grid-template-columns:1fr}}
-    .card{
-      background:linear-gradient(180deg, rgba(0,255,122,.06), transparent 55%), var(--panel);
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:18px;
-    }
-    .hero h1{
-      margin:10px 0 8px;
-      font-size:42px;line-height:1.08;
-      letter-spacing:.2px;
-      text-shadow:0 0 18px rgba(0,255,122,.22);
-    }
-    .hero h1 span{color:var(--green);text-shadow:0 0 22px rgba(0,255,122,.35)}
-    .sub{color:var(--muted);font-size:16px;margin:0 0 14px}
-    .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;gap:10px;
-      padding:12px 14px;border-radius:14px;border:1px solid var(--line);
-      text-decoration:none;font-weight:700;cursor:pointer;
-    }
-    .btn.primary{
-      background:linear-gradient(90deg, rgba(0,255,122,.95), rgba(0,204,100,.95));
-      color:#001a0d;border:none;
-      box-shadow:0 0 28px rgba(0,255,122,.25);
-    }
-    .btn.ghost{background:rgba(255,255,255,.02);color:var(--text)}
-    .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
-    @media (max-width:520px){.kpis{grid-template-columns:1fr}}
-    .kpi{padding:12px;border:1px solid var(--line);border-radius:16px;background:rgba(0,0,0,.16)}
-    .kpi b{display:block;font-size:18px;margin-bottom:2px}
-    .kpi small{color:var(--muted)}
-    .h2{margin:0 0 10px;font-size:18px;letter-spacing:.2px}
-    .list{margin:0;padding-left:18px;color:var(--muted)}
-    .split{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    @media (max-width:700px){.split{grid-template-columns:1fr}}
-    .hr{height:1px;background:var(--line);margin:16px 0}
-    .tag{display:inline-block;padding:6px 10px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:12px;margin:6px 6px 0 0}
-    .fine{color:var(--muted);font-size:12px;margin-top:10px}
-    .cta{
-      position:sticky;top:14px;
-    }
-    .input{
-      width:100%;padding:12px 12px;border-radius:14px;border:1px solid var(--line);
-      background:rgba(0,0,0,.25);color:var(--text);outline:none;
-    }
-    .input::placeholder{color:rgba(167,215,192,.70)}
-    .mini{font-size:12px;color:var(--muted);margin-top:8px}
-    .faq details{border:1px solid var(--line);border-radius:16px;padding:12px 12px;background:rgba(0,0,0,.14);margin-bottom:10px}
-    .faq summary{cursor:pointer;font-weight:700}
-    .faq p{color:var(--muted);margin:8px 0 0}
-  </style>
+<style>
+body{
+margin:0;
+font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+background:#020b0a;
+color:#e9fff3;
+line-height:1.6;
+}
+
+.container{
+max-width:900px;
+margin:0 auto;
+padding:40px 20px;
+}
+
+h1{
+font-size:42px;
+margin-bottom:10px;
+color:#00ff7a;
+text-shadow:0 0 15px rgba(0,255,122,.3);
+}
+
+h2{
+margin-top:40px;
+font-size:22px;
+color:#00ff7a;
+}
+
+p{
+color:#bfffe0;
+}
+
+.section{
+background:#071513;
+padding:25px;
+border-radius:18px;
+margin-bottom:25px;
+border:1px solid rgba(0,255,122,.2);
+}
+
+.btn{
+display:inline-block;
+margin-top:20px;
+padding:14px 22px;
+background:#00ff7a;
+color:#002d18;
+font-weight:700;
+border-radius:12px;
+text-decoration:none;
+}
+
+.btn:hover{
+background:#00cc64;
+}
+
+ul{
+color:#bfffe0;
+}
+
+.small{
+font-size:13px;
+color:#89cdb1;
+margin-top:10px;
+}
+</style>
 </head>
+
 <body>
-  <div class="wrap">
-    <div class="topbar">
-      <div class="brand">
-        <div class="dot"></div>
-        <b>Polish Biohacker</b>
-        <span class="pill">Landing testowy • zbieramy listę na 1. serię</span>
-      </div>
-      <a class="btn ghost" href="./index.html">Powrót</a>
-    </div>
+<div class="container">
 
-    <div class="grid">
-      <div class="card hero" id="top">
-        <div class="pill">MITO • energia komórkowa • focus bez „kawy”</div>
-        <h1><span>MITO MORNING</span><br/>Poranny stack na czystą energię</h1>
-        <p class="sub">
-          Dla ludzi, którzy chcą wejść w dzień z mocą: stabilna energia, koncentracja i „czysta głowa”.
-          Bez agresywnego preworkoutu. Bez jittera.
-        </p>
+<h1>MITO MORNING</h1>
+<p>Poranny stack dla ludzi, którzy chcą stabilnej energii, skupienia i realnego wsparcia metabolizmu komórkowego – bez agresywnego pobudzenia.</p>
 
-        <div class="btnrow">
-          <a class="btn primary" href="#signup" onclick="gtag('event','cta_click',{label:'hero_signup'})">
-            Zapisz się na 1. serię
-          </a>
-          <a class="btn ghost" href="#formula" onclick="gtag('event','cta_click',{label:'hero_formula'})">
-            Zobacz skład i działanie
-          </a>
-        </div>
+<div class="section">
+<h2>Co daje MITO MORNING?</h2>
+<ul>
+<li>Stabilna energia bez „zjazdu”</li>
+<li>Lepsza koncentracja i klarowność myślenia</li>
+<li>Wsparcie mitochondriów i metabolizmu energii</li>
+<li>Lepsze wejście w dzień, trening i pracę umysłową</li>
+</ul>
+</div>
 
-        <div class="kpis">
-          <div class="kpi">
-            <b>1 porcja</b>
-            <small>~5 g proszku (cel: prosto i skutecznie)</small>
-          </div>
-          <div class="kpi">
-            <b>1 puszka</b>
-            <small>~250 g / ~50 porcji</small>
-          </div>
-          <div class="kpi">
-            <b>1. seria</b>
-            <small>limitowana (test popytu)</small>
-          </div>
-        </div>
+<div class="section">
+<h2>Skład (wersja robocza – do konsultacji technologicznej)</h2>
+<ul>
+<li>Acetyl-L-karnityna (ALCAR)</li>
+<li>L-tyrozyna</li>
+<li>Tauryna</li>
+<li>TMG (betaina) – wsparcie metylacji i produkcji energii</li>
+<li>Kompleks witamin B (aktywne formy, m.in. B6 jako P-5-P)</li>
+<li>Elektrolity (np. sód / magnez)</li>
+</ul>
+<p class="small">Finalne dawki zostaną doprecyzowane po konsultacji z producentem (rozpuszczalność, smak, stabilność).</p>
+</div>
 
-        <div class="hr"></div>
+<div class="section">
+<h2>Pierwsza seria</h2>
+<p>Limitowana partia testowa. Zbieramy listę zainteresowanych przed startem produkcji.</p>
 
-        <div class="split" id="formula">
-          <div>
-            <div class="h2">Co to robi (w praktyce)?</div>
-            <ul class="list">
-              <li>stabilna energia mentalna bez „zjazdu”</li>
-              <li>focus i motywacja do działania</li>
-              <li>wsparcie układu nerwowego i metabolizmu energii</li>
-              <li>lepsze wejście w trening / pracę</li>
-            </ul>
-            <div class="fine">*To suplement diety. Nie jest lekiem. Efekty zależą od stylu życia.</div>
-          </div>
-          <div>
-            <div class="h2">Dla kogo?</div>
-            <div class="tag">30+ zmęczeni stresem</div>
-            <div class="tag">Trening rano</div>
-            <div class="tag">Praca umysłowa</div>
-            <div class="tag">Biohacking basic</div>
-            <div class="tag">Bez kofeiny</div>
-            <div class="tag">Chcesz „czystej głowy”</div>
-          </div>
-        </div>
+<a class="btn" 
+href="PASTE_TUTAJ_LINK_DO_GOOGLE_FORMS" 
+target="_blank"
+onclick="gtag('event','lead_click',{label:'mito_morning_signup'})">
+Zapisz się na pierwszą serię
+</a>
 
-        <div class="hr"></div>
+<p class="small">Zostaw mail, aby otrzymać informację o cenie i starcie przedsprzedaży.</p>
+</div>
 
-        <div class="h2">Skład (wersja robocza – do finalnej konsultacji technologicznej)</div>
-        <ul class="list">
-          <li>Acetyl-L-karnityna (ALCAR)</li>
-          <li>L-tyrozyna</li>
-          <li>Tauryna</li>
-          <li>Kompleks witamin B (aktywne/metylowane formy, m.in. B6 jako P-5-P)</li>
-          <li>Elektrolity (np. sód / magnez)</li>
-        </ul>
-        <div class="fine">Jeśli chcesz, dorzucimy precyzyjne dawki po feedbacku od producenta (rozpuszczalność, smak, stabilność).</div>
-
-        <div class="hr"></div>
-
-        <div class="faq">
-          <div class="h2">FAQ</div>
-
-          <details>
-            <summary>Czy to jest pre-workout?</summary>
-            <p>Nie. To poranny stack na energię i koncentrację. Ma działać „czysto”, bez agresji i bez kawowego pobudzenia.</p>
-          </details>
-
-          <details>
-            <summary>Czy będzie kofeina?</summary>
-            <p>W wersji MITO MORNING celujemy w brak kofeiny. Jeśli kiedyś zrobimy wersję Performance, tam to się rozważy.</p>
-          </details>
-
-          <details>
-            <summary>Kiedy start sprzedaży?</summary>
-            <p>Jak tylko uzbieramy listę chętnych na pierwszą serię i dopniemy wycenę oraz produkcję.</p>
-          </details>
-        </div>
-      </div>
-
-      <div class="card cta" id="signup">
-        <div class="pill">Pierwsza seria • lista zainteresowanych</div>
-        <h2 style="margin:10px 0 6px;font-size:22px;">Zapisz się</h2>
-        <p class="sub" style="margin:0 0 12px;">
-          Dostaniesz info o starcie, cenie i przedsprzedaży. Bez spamu.
-        </p>
-
-        <!-- NAJPROSTSZA OPCJA: link do Google Forms -->
-        <a class="btn primary" style="width:100%;margin-bottom:10px;"
-           href="PASTE_YOUR_GOOGLE_FORM_LINK_HERE"
-           target="_blank"
-           rel="noopener"
-           onclick="gtag('event','lead_form_open',{label:'mito_morning_google_form'})">
-          Otwórz formularz zapisu
-        </a>
-
-        <div class="mini">
-          Nie masz formularza? Zrób Google Forms w 2 min i wklej link w miejsce
-          <b>PASTE_YOUR_GOOGLE_FORM_LINK_HERE</b>.
-        </div>
-
-        <div class="hr"></div>
-
-        <div class="h2">Co dalej?</div>
-        <ul class="list">
-          <li>zbieramy zapisy</li>
-          <li>ustalamy finalny koszt i skład z producentem</li>
-          <li>start przedsprzedaży 1. serii</li>
-        </ul>
-
-        <div class="fine">
-          *Jeśli chcesz mierzyć kliknięcia CTA w Analytics, już to robimy eventami w kodzie (cta_click / lead_form_open).
-        </div>
-      </div>
-    </div>
-  </div>
+</div>
 </body>
 </html>
