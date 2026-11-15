@@ -2,14 +2,36 @@
 <html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Kalkulator kalorii i białka + Huawei Watch | Polish Biohacker</title>
 <meta name="description" content="Kalkulator zapotrzebowania na kalorie (Mifflin–St Jeor) i białko, zliczanie jaj, mięsa, serka i odżywki białkowej. Wyniki szacunkowe.">
-<meta name="theme-color" content="#060b09"><link rel="stylesheet" href="assets/site.css"></head>
+<meta name="theme-color" content="#060b09"><link rel="stylesheet" href="assets/site.css?v=20261115-2"></head>
 <body><header data-site-header></header>
 <main class="container">
 <section class="page-hero"><span class="eyebrow">Narzędzia Polish Biohacker</span><h1>Oblicz. Zrozum. <span class="accent">Dostosuj.</span></h1><p class="lead">Kalkulator energetyczny i białkowy w dwóch trybach: klasycznym i Huawei Watch. Sprawdź szacunkowy wydatek energii i bilans dnia, bez podwójnego liczenia aktywności.</p></section>
 <div class="grid-2" style="align-items:start;margin-bottom:60px">
 <div class="panel">
-<h2 style="font-size:1.65rem">Twój profil</h2>
 <form id="calcForm" novalidate>
+ <div class="watch-head"><span class="eyebrow">NOWOŚĆ · TRYB HUAWEI</span><h2 style="font-size:1.65rem;margin-bottom:9px">Dzienne spalanie z zegarka</h2>
+ <p class="muted text-sm">Wpisz liczbę spalonych kalorii z Huawei Watch. Wynik zmieni się według danych z wybranego dnia. Możesz też korzystać z kalkulatora bez zegarka.</p></div>
+ <label class="field form-section">Tryb obliczeń
+   <select id="energyMode"><option value="watch" selected>Huawei Watch — wpisuję spalone kcal</option><option value="formula">Bez zegarka — wylicz z aktywności</option></select>
+ </label>
+ <div id="watchPanel" class="panel watch-panel">
+  <span class="eyebrow">Huawei Watch GT 5 Pro · Stay Fit</span>
+  <p class="muted text-sm">W aplikacji <strong>Stay Fit</strong> wybierz „Dzisiejsze spalone kalorie / Today's calories burnt”. Zobaczysz <strong>Burned / Total</strong> (łączne), <strong>Resting</strong> (spoczynkowe) i <strong>Active</strong> (aktywne).</p>
+  <label class="field form-section">Który odczyt przepisujesz?
+   <select id="watchInputMode"><option value="total">Burned / Total — kalorie łącznie</option><option value="split">Resting + Active — dwie wartości</option><option value="active">Active — plus oszacowane spoczynkowe</option></select>
+  </label>
+  <div class="field-grid">
+   <label class="field" id="watchTotalField">Dzienne spalone kalorie (Burned / Total, kcal)<input id="watchTotal" type="number" min="300" max="15000" step="1" placeholder="np. 3350" inputmode="numeric"></label>
+   <label class="field" id="watchRestField" hidden>Resting (kcal)<input id="watchRest" type="number" min="100" max="6000" step="1" placeholder="np. 1950" inputmode="numeric"></label>
+   <label class="field" id="watchActiveField" hidden>Active (kcal)<input id="watchActive" type="number" min="0" max="10000" step="1" placeholder="np. 1400" inputmode="numeric"></label>
+   <label class="field">Liczba kroków (opcjonalnie, informacyjnie)<input id="watchSteps" type="number" min="0" max="100000" step="1" placeholder="np. 18000"><small>Do historii, nie do dodawania kalorii.</small></label>
+   <label class="field">Okres pomiaru<select id="watchPeriod"><option value="complete">Zakończony dzień (zalecany)</option><option value="partial">Dzisiaj — dzień jeszcze trwa</option></select></label>
+  </div>
+  <p class="mini" style="margin-top:15px">Ważne: wybierz <strong>łączną energię (Total / Burned)</strong>, a nie same kalorie aktywne. Kroki, praca i trening są już wliczone w Active — nie dodawaj ich po raz drugi. Dane wpisujesz ręcznie.</p>
+ </div>
+
+<hr class="divider">
+<h2 style="font-size:1.65rem">Twój profil</h2>
  <div class="field-grid form-section">
   <label class="field">Masa ciała (kg)<input id="weight" type="number" min="30" max="300" step=".1" placeholder="np. 90" required inputmode="decimal"></label>
   <label class="field">Wzrost (cm)<input id="height" type="number" min="120" max="230" step="1" placeholder="np. 178" required inputmode="numeric"></label>
@@ -20,26 +42,6 @@
   <label class="field">Białko (g/kg masy ciała)<input id="proteinFactor" type="number" min="1" max="3" step=".1" value="2.0" required><small>Wartość personalizowana; 2 g/kg nie jest wymogiem dla wszystkich.</small></label>
  </div>
 
- <hr class="divider">
- <h2 style="font-size:1.65rem">Skąd bierzemy spalone kalorie?</h2>
- <label class="field form-section">Tryb obliczeń
-   <select id="energyMode"><option value="formula">Wzór + aktywność (standardowy)</option><option value="watch">Huawei Watch (zegar / Huawei Zdrowie)</option></select>
- </label>
- <div id="watchPanel" class="panel" hidden>
-  <span class="eyebrow">Huawei Watch GT 5 Pro · Stay Fit</span>
-  <p class="muted text-sm">W aplikacji <strong>Stay Fit</strong> wybierz „Dzisiejsze spalone kalorie / Today's calories burnt”. Zobaczysz <strong>Burned / Total</strong> (łączne), <strong>Resting</strong> (spoczynkowe) i <strong>Active</strong> (aktywne).</p>
-  <label class="field form-section">Który odczyt przepisujesz?
-   <select id="watchInputMode"><option value="total">Burned / Total — kalorie łącznie</option><option value="split">Resting + Active — dwie wartości</option><option value="active">Active — plus oszacowane spoczynkowe</option></select>
-  </label>
-  <div class="field-grid">
-   <label class="field" id="watchTotalField">Burned / Total (kcal)<input id="watchTotal" type="number" min="300" max="15000" step="1" placeholder="np. 3350" inputmode="numeric"></label>
-   <label class="field" id="watchRestField" hidden>Resting (kcal)<input id="watchRest" type="number" min="100" max="6000" step="1" placeholder="np. 1950" inputmode="numeric"></label>
-   <label class="field" id="watchActiveField" hidden>Active (kcal)<input id="watchActive" type="number" min="0" max="10000" step="1" placeholder="np. 1400" inputmode="numeric"></label>
-   <label class="field">Liczba kroków (opcjonalnie)<input id="watchSteps" type="number" min="0" max="100000" step="1" placeholder="np. 18000"><small>Do historii, nie do dodawania kalorii.</small></label>
-   <label class="field">Okres pomiaru<select id="watchPeriod"><option value="complete">Zakończony dzień (zalecany)</option><option value="partial">Dzisiaj — dzień jeszcze trwa</option></select></label>
-  </div>
-  <p class="notice" style="margin-top:15px">Nie dodawaj kalorii z kroków, pracy i treningu oddzielnie. Są już uwzględniane w danych Active. To ręczny odczyt, bez synchronizacji konta Huawei.</p>
- </div>
  <hr class="divider">
  <h2 style="font-size:1.65rem">Co zjadłeś w analizowanym dniu?</h2>
  <p class="muted text-sm">Podaj ilości lub wpisz zero. Wartości odżywcze są uśrednione — etykieta produktu ma pierwszeństwo.</p>
@@ -60,9 +62,10 @@
 </div>
 <div>
  <section id="calcResults" class="panel calc-result" hidden aria-live="polite">
-  <span class="eyebrow" id="resultModeLabel">Twój szacunkowy cel dzienny</span>
+  <span class="eyebrow" id="resultModeLabel">Orientacyjny dzienny cel spożycia</span>
   <div id="energyResult" class="result-number"></div><p id="burnBasis" class="mini"></p>
-  <dl><div><dt>Wydatek energetyczny</dt><dd id="burnResult"></dd></div><div><dt>Bilans: spożyte − spalone</dt><dd id="actualBalanceResult"></dd></div><div><dt>Białko docelowe</dt><dd id="proteinResult"></dd></div><div><dt>Wpisane białko</dt><dd id="foodProteinResult"></dd></div><div><dt>Wpisana energia</dt><dd id="foodEnergyResult"></dd></div><div><dt>Różnica kcal</dt><dd id="energyLeftResult"></dd></div></dl>
+  <div class="energy-summary"><div class="energy-stat"><span>Spalone w dniu</span><strong id="burnResult">—</strong></div><div class="energy-stat"><span>Spożyte w dniu</span><strong id="foodEnergyResult">—</strong></div><div class="energy-stat energy-balance"><span>Bilans: spożyte − spalone</span><strong id="actualBalanceResult">—</strong></div></div>
+  <dl><div><dt>Białko docelowe</dt><dd id="proteinResult"></dd></div><div><dt>Wpisane białko</dt><dd id="foodProteinResult"></dd></div><div><dt>Do wybranego celu</dt><dd id="energyLeftResult"></dd></div></dl>
   <p id="proteinLeftResult"></p><p class="mini" id="calorieInfo"></p><hr class="divider">
   <p class="mini">BMR według wzoru: <strong id="bmrResult"></strong>. Wydatek przed modyfikacją celu: <strong id="tdeeResult"></strong>. Odczyt z zegarka zastępuje TDEE wyliczone ze współczynnika aktywności — nie dodaje się obu.</p>
   <button id="saveResult" class="btn btn-secondary" type="button" disabled>Zapisz wynik na urządzeniu</button><p class="mini" id="saveInfo" role="status"></p>
@@ -74,5 +77,5 @@
 </div>
 </div>
 </main><footer data-site-footer></footer>
-<script src="assets/site.js" defer></script><script src="assets/calc.js" defer></script>
+<script src="assets/site.js" defer></script><script src="assets/calc.js?v=20261115-2" defer></script>
 </body></html>
