@@ -8,6 +8,8 @@ const nf=new Intl.NumberFormat("pl-PL",{maximumFractionDigits:0});
 const n1=new Intl.NumberFormat("pl-PL",{maximumFractionDigits:1});
 const KEY="polish-biohacker-calculator-history-v1";
 let lastRecord=null;
+let autoRefresh=false;
+let hasCalculated=false;
 const foodDefaults={
  beefLean:{p:20,kcal:165},beefFat:{p:18,kcal:250},
  beefCooked:{p:26,kcal:250},chicken:{p:23,kcal:120},pork:{p:21,kcal:190}
@@ -138,9 +140,21 @@ form.addEventListener("submit",event=>{
  $("calcResults").hidden=false;
  lastRecord={date:new Date().toLocaleDateString("pl-PL"),source:watch?"watch":"formula",weight,calories:target===null?Math.round(expenditure):target,protein:proteinTarget,foodProtein:Math.round(foodProtein),foodEnergy:Math.round(foodEnergy),balance:Math.round(balance),steps};
  $("saveResult").disabled=false;
+ hasCalculated=true;
  $("saveInfo").textContent="";
- $("calcResults").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth",block:"nearest"});
+ if(!autoRefresh) $("calcResults").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth",block:"nearest"});
 });
+// Once a complete calculation succeeds, editing Huawei readings or food refreshes results
+// without forcing the mobile browser to scroll on every keystroke.
+function refreshOnEdit(){
+ if(!hasCalculated||autoRefresh)return;
+ autoRefresh=true;
+ try{form.dispatchEvent(new Event("submit",{bubbles:true,cancelable:true}));}
+ finally{autoRefresh=false;}
+}
+form.addEventListener("input",refreshOnEdit);
+form.addEventListener("change",refreshOnEdit);
+
 $("saveResult").addEventListener("click",()=>{
  if(!lastRecord)return;
  try{
