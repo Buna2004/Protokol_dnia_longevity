@@ -29,3 +29,13 @@
 .energy-breakdown div{border:1px solid #3d8a55;background:#0d2517;border-radius:12px;padding:13px 14px;color:#c3dec9;font-size:.87rem}
 .energy-breakdown strong{display:block;color:var(--green);font-size:1.2rem;margin-top:3px}
 @media(max-width:580px){.energy-breakdown{grid-template-columns:1fr}}
+
+
+/* Polish Biohacker social media buttons in the shared footer */
+.footer-social{display:flex;flex-wrap:wrap;align-items:center;gap:10px;width:100%;margin-top:2px}
+.footer-social .social-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 15px;min-height:44px;border:1px solid #3b8651;border-radius:12px;background:#112b1b;color:#e7ffed;font-size:.9rem;font-weight:750;white-space:nowrap;transition:background .2s ease,border-color .2s ease,transform .2s ease}
+.footer-social .social-btn:hover{background:#1b4628;border-color:var(--green);color:#fff;transform:translateY(-2px)}
+.footer-social .social-btn:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+.footer-social .social-symbol{display:inline-grid;place-items:center;width:22px;height:22px;background:#234c31;border-radius:7px;color:var(--green);font-size:1.05rem;font-weight:900;line-height:1}
+.footer-disclaimer{width:100%}
+@media(max-width:560px){.footer-social{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.footer-social .social-btn{white-space:normal;padding:10px 8px;font-size:.83rem;gap:5px}.footer-social .social-symbol{flex-shrink:0}}
