@@ -7,6 +7,7 @@ const $=id=>document.getElementById(id);
 const nf=new Intl.NumberFormat("pl-PL",{maximumFractionDigits:0});
 const n1=new Intl.NumberFormat("pl-PL",{maximumFractionDigits:1});
 const KEY="polish-biohacker-calculator-history-v1";
+let lastRecord=null;
 const foodDefaults={
  beefLean:{p:20,kcal:165},beefFat:{p:18,kcal:250},
  beefCooked:{p:26,kcal:250},chicken:{p:23,kcal:120},pork:{p:21,kcal:190}
@@ -37,7 +38,6 @@ function updateWatchUI(){
 $("energyMode").addEventListener("change",updateWatchUI);
 $("watchInputMode").addEventListener("change",updateWatchUI);
 updateWatchUI();
-let lastRecord=null;
 function renderHistory(){
  const holder=$("history");
  let history=[];
