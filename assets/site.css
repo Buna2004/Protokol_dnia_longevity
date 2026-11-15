@@ -23,3 +23,9 @@
 #calcResults .result-number{margin-top:8px}
 @media(max-width:950px){.energy-summary{grid-template-columns:1fr}}
 @media(max-width:490px){.watch-head{padding:18px 16px}.watch-panel{padding:18px 15px}.energy-stat strong{font-size:1.5rem}}
+
+/* Energy calculation: active kcal + estimated resting BMR */
+.energy-breakdown{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:16px 0 10px}
+.energy-breakdown div{border:1px solid #3d8a55;background:#0d2517;border-radius:12px;padding:13px 14px;color:#c3dec9;font-size:.87rem}
+.energy-breakdown strong{display:block;color:var(--green);font-size:1.2rem;margin-top:3px}
+@media(max-width:580px){.energy-breakdown{grid-template-columns:1fr}}
