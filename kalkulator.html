@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kalkulator kalorii i białka | Polish Biohacker</title>
+<title>Kalkulator kalorii i białka + Huawei Watch | Polish Biohacker</title>
 <meta name="description" content="Kalkulator zapotrzebowania na kalorie (Mifflin–St Jeor) i białko, zliczanie jaj, mięsa, serka i odżywki białkowej. Wyniki szacunkowe.">
 <meta name="theme-color" content="#060b09"><link rel="stylesheet" href="assets/site.css"></head>
 <body><header data-site-header></header>
 <main class="container">
-<section class="page-hero"><span class="eyebrow">Narzędzia Polish Biohacker</span><h1>Oblicz. Zrozum. <span class="accent">Dostosuj.</span></h1><p class="lead">Kalkulator energetyczny i białkowy w jednym miejscu. Mniej zgadywania, więcej świadomych założeń — bez udawania, że wzór zna dokładnie Twój metabolizm.</p></section>
+<section class="page-hero"><span class="eyebrow">Narzędzia Polish Biohacker</span><h1>Oblicz. Zrozum. <span class="accent">Dostosuj.</span></h1><p class="lead">Kalkulator energetyczny i białkowy w dwóch trybach: klasycznym i Huawei Watch. Sprawdź szacunkowy wydatek energii i bilans dnia, bez podwójnego liczenia aktywności.</p></section>
 <div class="grid-2" style="align-items:start;margin-bottom:60px">
 <div class="panel">
 <h2 style="font-size:1.65rem">Twój profil</h2>
@@ -15,12 +15,33 @@
   <label class="field">Wzrost (cm)<input id="height" type="number" min="120" max="230" step="1" placeholder="np. 178" required inputmode="numeric"></label>
   <label class="field">Wiek (lata)<input id="age" type="number" min="16" max="100" step="1" placeholder="np. 39" required inputmode="numeric"></label>
   <label class="field">Płeć do wzoru BMR<select id="sex"><option value="male">Mężczyzna</option><option value="female">Kobieta</option></select><small>Wzór Mifflina–St Jeora stosuje dwa warianty.</small></label>
-  <label class="field">Aktywność łącznie z pracą<select id="activity"><option value="1.2">Siedzący tryb życia (×1,2)</option><option value="1.375">Lekka aktywność (×1,375)</option><option value="1.55" selected>Umiarkowana (×1,55)</option><option value="1.725">Wysoka (×1,725)</option><option value="1.9">Bardzo wysoka (×1,9)</option></select></label>
+  <label class="field" id="activityField">Aktywność łącznie z pracą<select id="activity"><option value="1.2">Siedzący tryb życia (×1,2)</option><option value="1.375">Lekka aktywność (×1,375)</option><option value="1.55" selected>Umiarkowana (×1,55)</option><option value="1.725">Wysoka (×1,725)</option><option value="1.9">Bardzo wysoka (×1,9)</option></select></label>
   <label class="field">Cel<select id="goal"><option value="maintain">Utrzymanie (0%)</option><option value="cut">Redukcja (–15%)</option><option value="bulk">Budowa masy (+8%)</option><option value="longevity">Longevity (bez automatycznego deficytu)</option></select></label>
   <label class="field">Białko (g/kg masy ciała)<input id="proteinFactor" type="number" min="1" max="3" step=".1" value="2.0" required><small>Wartość personalizowana; 2 g/kg nie jest wymogiem dla wszystkich.</small></label>
  </div>
+
  <hr class="divider">
- <h2 style="font-size:1.65rem">Co dzisiaj zjadłeś?</h2>
+ <h2 style="font-size:1.65rem">Skąd bierzemy spalone kalorie?</h2>
+ <label class="field form-section">Tryb obliczeń
+   <select id="energyMode"><option value="formula">Wzór + aktywność (standardowy)</option><option value="watch">Huawei Watch (zegar / Huawei Zdrowie)</option></select>
+ </label>
+ <div id="watchPanel" class="panel" hidden>
+  <span class="eyebrow">Huawei Watch GT 5 Pro · Stay Fit</span>
+  <p class="muted text-sm">W aplikacji <strong>Stay Fit</strong> wybierz „Dzisiejsze spalone kalorie / Today's calories burnt”. Zobaczysz <strong>Burned / Total</strong> (łączne), <strong>Resting</strong> (spoczynkowe) i <strong>Active</strong> (aktywne).</p>
+  <label class="field form-section">Który odczyt przepisujesz?
+   <select id="watchInputMode"><option value="total">Burned / Total — kalorie łącznie</option><option value="split">Resting + Active — dwie wartości</option><option value="active">Active — plus oszacowane spoczynkowe</option></select>
+  </label>
+  <div class="field-grid">
+   <label class="field" id="watchTotalField">Burned / Total (kcal)<input id="watchTotal" type="number" min="300" max="15000" step="1" placeholder="np. 3350" inputmode="numeric"></label>
+   <label class="field" id="watchRestField" hidden>Resting (kcal)<input id="watchRest" type="number" min="100" max="6000" step="1" placeholder="np. 1950" inputmode="numeric"></label>
+   <label class="field" id="watchActiveField" hidden>Active (kcal)<input id="watchActive" type="number" min="0" max="10000" step="1" placeholder="np. 1400" inputmode="numeric"></label>
+   <label class="field">Liczba kroków (opcjonalnie)<input id="watchSteps" type="number" min="0" max="100000" step="1" placeholder="np. 18000"><small>Do historii, nie do dodawania kalorii.</small></label>
+   <label class="field">Okres pomiaru<select id="watchPeriod"><option value="complete">Zakończony dzień (zalecany)</option><option value="partial">Dzisiaj — dzień jeszcze trwa</option></select></label>
+  </div>
+  <p class="notice" style="margin-top:15px">Nie dodawaj kalorii z kroków, pracy i treningu oddzielnie. Są już uwzględniane w danych Active. To ręczny odczyt, bez synchronizacji konta Huawei.</p>
+ </div>
+ <hr class="divider">
+ <h2 style="font-size:1.65rem">Co zjadłeś w analizowanym dniu?</h2>
  <p class="muted text-sm">Podaj ilości lub wpisz zero. Wartości odżywcze są uśrednione — etykieta produktu ma pierwszeństwo.</p>
  <div class="field-grid form-section">
   <label class="field">Jajka (sztuki)<input id="eggs" type="number" min="0" max="50" step="1" value="0" required></label>
@@ -28,24 +49,27 @@
   <label class="field">Rodzaj mięsa<select id="meatType"><option value="beefLean">Wołowina chuda, surowa</option><option value="beefFat">Wołowina tłustsza, surowa</option><option value="beefCooked">Wołowina po obróbce</option><option value="chicken">Pierś kurczaka, surowa</option><option value="pork">Wieprzowina, orientacyjnie</option></select></label>
   <label class="field">Serek / twaróg (gramy)<input id="dairy" type="number" min="0" max="3000" step="1" value="0" required><small>W modelu: ~11 g białka i 100 kcal / 100 g.</small></label>
   <label class="field">Odżywka whey (gramy proszku)<input id="whey" type="number" min="0" max="500" step="1" value="0" required><small>Model: ~80% białka, 400 kcal / 100 g proszku.</small></label>
+
+  <label class="field">Inne jedzenie i napoje (kcal)<input id="otherKcal" type="number" min="0" max="15000" step="1" value="0" required><small>Wpisz kalorie pozostałych produktów, sosów, napojów itd.</small></label>
+  <label class="field">Białko z innych produktów (g)<input id="otherProtein" type="number" min="0" max="700" step=".1" value="0" required></label>
  </div>
- <p class="notice">Nie uwzględniono innych produktów, sosów, napojów ani indywidualnych różnic w etykietach. To kalkulator przybliżony.</p>
+ <p class="notice">Aby ocenić bilans dnia, trzeba wprowadzić <strong>wszystkie</strong> spożyte produkty z tego samego okresu. Wyniki i wartości kaloryczne produktów są szacunkowe.</p>
  <button class="btn btn-primary" type="submit" style="margin-top:18px;width:100%">Przelicz moje zapotrzebowanie →</button>
  <p id="calcError" class="notice warning" role="alert" hidden></p>
 </form>
 </div>
 <div>
  <section id="calcResults" class="panel calc-result" hidden aria-live="polite">
-  <span class="eyebrow">Twój szacunkowy cel dzienny</span>
-  <div id="energyResult" class="result-number"></div>
-  <dl><div><dt>Białko docelowe</dt><dd id="proteinResult"></dd></div><div><dt>Wpisane białko</dt><dd id="foodProteinResult"></dd></div><div><dt>Wpisana energia</dt><dd id="foodEnergyResult"></dd></div><div><dt>Różnica kcal</dt><dd id="energyLeftResult"></dd></div></dl>
+  <span class="eyebrow" id="resultModeLabel">Twój szacunkowy cel dzienny</span>
+  <div id="energyResult" class="result-number"></div><p id="burnBasis" class="mini"></p>
+  <dl><div><dt>Wydatek energetyczny</dt><dd id="burnResult"></dd></div><div><dt>Bilans: spożyte − spalone</dt><dd id="actualBalanceResult"></dd></div><div><dt>Białko docelowe</dt><dd id="proteinResult"></dd></div><div><dt>Wpisane białko</dt><dd id="foodProteinResult"></dd></div><div><dt>Wpisana energia</dt><dd id="foodEnergyResult"></dd></div><div><dt>Różnica kcal</dt><dd id="energyLeftResult"></dd></div></dl>
   <p id="proteinLeftResult"></p><p class="mini" id="calorieInfo"></p><hr class="divider">
-  <p class="mini">BMR według wzoru: <strong id="bmrResult"></strong>. TDEE przed modyfikacją celu: <strong id="tdeeResult"></strong>. BMR to nie całkowite dzienne zapotrzebowanie.</p>
+  <p class="mini">BMR według wzoru: <strong id="bmrResult"></strong>. Wydatek przed modyfikacją celu: <strong id="tdeeResult"></strong>. Odczyt z zegarka zastępuje TDEE wyliczone ze współczynnika aktywności — nie dodaje się obu.</p>
   <button id="saveResult" class="btn btn-secondary" type="button" disabled>Zapisz wynik na urządzeniu</button><p class="mini" id="saveInfo" role="status"></p>
  </section>
  <div class="panel" style="margin-top:18px"><span class="eyebrow">Historia lokalna</span><h3>Twoje ostatnie obliczenia</h3><p class="mini">Zapis jest dobrowolny i pozostaje wyłącznie w przeglądarce tego urządzenia. Dane nie są wysyłane do serwera ani do nas.</p><div id="history"></div><button id="clearHistory" class="btn btn-secondary" type="button">Wyczyść historię</button></div>
  <div class="panel" style="margin-top:18px"><span class="eyebrow">Interpretacja</span><h3>Jak czytać wynik?</h3>
- <ul class="info-list"><li>TDEE to punkt startowy. Najlepiej weryfikować go na podstawie trendu masy ciała i spożycia przez 2–4 tygodnie.</li><li>Współczynnik aktywności obejmuje również aktywną pracę — nie dodawaj jej drugi raz.</li><li>Dla osób ze znaczną otyłością, ciężkimi chorobami lub szczególnymi potrzebami żywieniowymi proste g/kg może być mylące.</li><li>Odpowiednie spożycie białka zależy od wieku, treningu, stanu zdrowia i całej diety.</li></ul>
+ <ul class="info-list"><li>TDEE to punkt startowy. Najlepiej weryfikować go na podstawie trendu masy ciała i spożycia przez 2–4 tygodnie.</li><li>Współczynnik aktywności obejmuje również aktywną pracę — nie dodawaj jej drugi raz.</li><li>Dla osób ze znaczną otyłością, ciężkimi chorobami lub szczególnymi potrzebami żywieniowymi proste g/kg może być mylące.</li><li>Odpowiednie spożycie białka zależy od wieku, treningu, stanu zdrowia i całej diety.</li></ul><p class="notice">Bilans = spożyte minus spalone. Ujemny sugeruje deficyt, dodatni nadwyżkę — tylko jeśli wpisano całą żywność z tego samego okresu. W trakcie dnia to jeszcze nie wynik dobowy. Odczyty zegarka mają istotny margines błędu.</p>
  </div>
 </div>
 </div>
