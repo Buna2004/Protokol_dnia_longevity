@@ -32,6 +32,7 @@ function updateWatchUI(){
  $("watchTotalField").hidden=!watch||mode!=="total";
  $("watchRestField").hidden=!watch||mode!=="split";
  $("watchActiveField").hidden=!watch||mode==="total";
+ $("watchRestPreview").hidden=!watch||mode!=="active";
  $("calcResults").hidden=true;
  $("calcError").hidden=true;
  $("saveResult").disabled=true;
@@ -96,6 +97,9 @@ form.addEventListener("submit",event=>{
   expenditure=bmr*activity;
  }else{
   const inputMode=$("watchInputMode").value;
+  if(period!=="complete" && inputMode!=="active"){
+   fail("W trybie całkowitych kalorii / Resting + Active wpisz odczyt z zakończonego dnia. Dla trwającego dnia użyj kalorii aktywnych + wyliczonego BMR.");return;
+  }
   const stepsRaw=$("watchSteps").value.trim();
   if(stepsRaw!==""){
    steps=n("watchSteps");
