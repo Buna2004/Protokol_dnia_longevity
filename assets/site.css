@@ -6,3 +6,20 @@
 @media(max-width:760px){.topbar .inner{min-height:65px}.menu-toggle{display:block}.nav{display:none;position:absolute;top:64px;left:0;right:0;background:#050c09;padding:20px;border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;gap:3px}.nav.open{display:flex}.nav a{font-size:1rem;padding:10px 15px}.container{width:min(calc(100% - 28px),var(--max))}.section{padding:58px 0}.hero{grid-template-columns:1fr;padding-top:45px;gap:24px}.hero-art{min-height:420px;max-height:580px}.feature{grid-template-columns:1fr}.stat-grid,.grid-3{grid-template-columns:1fr}.grid-2{grid-template-columns:1fr}.page-hero{padding:48px 0 20px}}
 @media(max-width:490px){.cards,.field-grid{grid-template-columns:1fr}.card{min-height:170px}.hero-art{min-height:350px}.btn-row .btn{width:100%}.calc-result dl{grid-template-columns:1fr}.stat{padding:18px}.section-title{margin-bottom:23px}.brand{font-size:1.13rem}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+
+/* Huawei Watch calculator: prominent input and instant-readable daily balance */
+.watch-head{margin-bottom:20px;padding:20px 22px;background:linear-gradient(130deg,#102f1d,#0a1710);border:1px solid #46995a;border-radius:18px}
+.watch-head h2{margin-bottom:8px}
+.watch-head p{margin-bottom:0}
+.watch-panel{margin-top:12px;margin-bottom:12px;background:linear-gradient(130deg,#12301e,#071810);border-color:#468a53}
+.watch-panel .field input:focus-visible,.watch-panel .field select:focus-visible{border-color:var(--green);box-shadow:0 0 0 2px #66f46c45}
+.energy-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin:21px 0 14px}
+.energy-stat{display:flex;flex-direction:column;gap:10px;padding:16px;background:#071c12;border:1px solid #2f7544;border-radius:14px;min-width:0}
+.energy-stat span{color:#a2bfae;font-size:.82rem;font-weight:700}
+.energy-stat strong{font-size:clamp(1.15rem,1.9vw,1.65rem);color:#f4fff5;line-height:1.25;overflow-wrap:anywhere}
+.energy-stat.energy-balance{background:linear-gradient(145deg,#113b21,#082216);border-color:#5bc96f}
+.energy-stat.energy-balance strong{color:var(--green)}
+#calcResults .result-number{margin-top:8px}
+@media(max-width:950px){.energy-summary{grid-template-columns:1fr}}
+@media(max-width:490px){.watch-head{padding:18px 16px}.watch-panel{padding:18px 15px}.energy-stat strong{font-size:1.5rem}}
