@@ -49,12 +49,12 @@ form.addEventListener("submit",e=>{
  $("tdeeResult").textContent=nf.format(tdee)+" kcal";
  lastRecord={date:new Date().toLocaleDateString("pl-PL"),weight:weight,calories:energy,protein:proteinTarget,foodProtein:Math.round(foodProtein),foodEnergy:Math.round(foodEnergy)};
  $("saveResult").disabled=false;
- $("calcResults").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"instant":"smooth",block:"nearest"});
+ $("calcResults").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth",block:"nearest"});
 });
 $("saveResult").addEventListener("click",()=>{
  if(!lastRecord)return;
  try{const history=JSON.parse(localStorage.getItem(KEY)||"[]");history.unshift(lastRecord);localStorage.setItem(KEY,JSON.stringify(history.slice(0,10)));renderHistory();$("saveInfo").textContent="Zapisano lokalnie w tej przeglądarce."}catch{$("saveInfo").textContent="Nie udało się zapisać lokalnie — sprawdź tryb prywatny lub ustawienia przeglądarki."}
 });
-$("clearHistory").addEventListener("click",()=>{localStorage.removeItem(KEY);lastRecord=null;$("saveInfo").textContent="Historia została wyczyszczona.";renderHistory()});
+$("clearHistory").addEventListener("click",()=>{try{localStorage.removeItem(KEY);lastRecord=null;$("saveInfo").textContent="Historia została wyczyszczona."}catch{$("saveInfo").textContent="Nie można wyczyścić danych w tej przeglądarce."}renderHistory()});
 renderHistory();
 })();
