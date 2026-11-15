@@ -1,4 +1,4 @@
-// Polish Biohacker — energy + protein calculator with manual Huawei Watch data.
+// Polish Biohacker — energy + protein calculator with manual Smartwatch data.
 // Estimates only: wearables do not directly measure daily energy expenditure.
 (()=>{
 "use strict";
@@ -66,7 +66,7 @@ function renderHistory(){
  for(const record of history.slice(0,10)){
   const p=document.createElement("p");
   p.className="mini";
-  const basis=record.source==="watch"?"Huawei Watch":"Wzór";
+  const basis=record.source==="watch"?"Smartwatch":"Wzór";
   const steps=Number.isFinite(record.steps)?" · "+nf.format(record.steps)+" kroków":"";
   const balance=Number.isFinite(record.balance)?" · bilans "+(record.balance>0?"+":"")+nf.format(record.balance)+" kcal":"";
   p.textContent=record.date+" · "+basis+" · "+record.weight+" kg · cel "+nf.format(record.calories)+" kcal · "+record.protein+" g białka"+steps+balance;
@@ -109,7 +109,7 @@ form.addEventListener("submit",event=>{
    const value=n("watchTotal");
    if(!valid(value,100,15000)){fail("Wpisz całkowite kalorie z pola Burned / Total (100–15 000 kcal).");return;}
    expenditure=value;
-   basis="Huawei Stay Fit: całkowite spalone kalorie (Burned / Total)";
+   basis="Smartwatch: całkowite spalone kalorie (Burned / Total)";
   }else if(inputMode==="split"){
    const rest=n("watchRest"),active=n("watchActive");
    if(!valid(rest,100,6000)||!valid(active,0,10000)||rest+active>15000){
@@ -117,16 +117,16 @@ form.addEventListener("submit",event=>{
    }
    expenditure=rest+active;
    restBurn=rest;activeBurn=active;
-   basis="Huawei: Resting + Active (wartości wpisane ręcznie)";
+   basis="Smartwatch: Resting + Active (wartości wpisane ręcznie)";
   }else if(inputMode==="active"){
    const active=n("watchActive");
    if(!valid(active,0,10000)||active+bmr>15000){
-    fail("Wpisz poprawne aktywne kalorie z Huawei (0–10 000 kcal).");return;
+    fail("Wpisz poprawne aktywne kalorie ze smartwatcha (0–10 000 kcal).");return;
    }
    activeBurn=active;restBurn=bmr;
    expenditure=active+bmr;
-   basis="Kalorie aktywne z Huawei + oszacowana spoczynkowa przemiana materii (BMR/24 h)";
-  }else{fail("Wybierz sposób wpisania danych Huawei.");return;}
+   basis="Kalorie aktywne ze smartwatcha + oszacowana spoczynkowa przemiana materii (BMR/24 h)";
+  }else{fail("Wybierz sposób wpisania danych smartwatcha.");return;}
  }
  const proteinTarget=Math.round(weight*proteinPerKg);
  const food=foodDefaults[$("meatType").value]||foodDefaults.beefLean;
@@ -164,7 +164,7 @@ form.addEventListener("submit",event=>{
  $("saveInfo").textContent="";
  if(!autoRefresh) $("calcResults").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth",block:"nearest"});
 });
-// Once a complete calculation succeeds, editing Huawei readings or food refreshes results
+// Once a complete calculation succeeds, editing smartwatch readings or food refreshes results
 // without forcing the mobile browser to scroll on every keystroke.
 function refreshOnEdit(){
  if(!hasCalculated||autoRefresh)return;
