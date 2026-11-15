@@ -40,6 +40,19 @@ function updateWatchUI(){
 $("energyMode").addEventListener("change",updateWatchUI);
 $("watchInputMode").addEventListener("change",updateWatchUI);
 updateWatchUI();
+function updateBmrPreview(){
+ const w=n("weight"),h=n("height"),age=n("age");
+ const sex=$("sex").value;
+ if(valid(w,30,300)&&valid(h,120,230)&&valid(age,16,100)){
+  const bmr=10*w+6.25*h-5*age+(sex==="male"?5:-161);
+  text("bmrPreview",nf.format(bmr)+" kcal / 24 h");
+ }else text("bmrPreview","uzupełnij masę, wzrost i wiek");
+}
+for(const id of ["weight","height","age","sex"]){
+ $(id).addEventListener("input",updateBmrPreview);
+ $(id).addEventListener("change",updateBmrPreview);
+}
+updateBmrPreview();
 function renderHistory(){
  const holder=$("history");
  let history=[];
@@ -78,7 +91,7 @@ form.addEventListener("submit",event=>{
  const goal=$("goal").value;
  const factor=goal==="cut"?0.85:goal==="bulk"?1.08:1;
  const period=watch?$("watchPeriod").value:"complete";
- let expenditure=NaN, basis="Model Mifflina–St Jeora × współczynnik aktywności",steps=null;
+ let expenditure=NaN, basis="Model Mifflina–St Jeora × współczynnik aktywności",steps=null,activeBurn=null,restBurn=null;
  if(!watch){
   expenditure=bmr*activity;
  }else{
@@ -99,17 +112,16 @@ form.addEventListener("submit",event=>{
     fail("Wpisz poprawne Resting (100–6000 kcal) i Active (0–10 000 kcal).");return;
    }
    expenditure=rest+active;
-   basis="Huawei Stay Fit: Resting + Active";
+   restBurn=rest;activeBurn=active;
+   basis="Huawei: Resting + Active (wartości wpisane ręcznie)";
   }else if(inputMode==="active"){
-   if(period!=="complete"){
-    fail("Dla trwającego dnia użyj wartości Burned / Total albo Resting + Active. Oszacowane pełnodobowe BMR nie pasuje do części dnia.");return;
-   }
    const active=n("watchActive");
    if(!valid(active,0,10000)||active+bmr>15000){
     fail("Wpisz poprawne aktywne kalorie z Huawei (0–10 000 kcal).");return;
    }
+   activeBurn=active;restBurn=bmr;
    expenditure=active+bmr;
-   basis="Huawei Active + oszacowane BMR (mniej dokładne, nie odczyt pełnego spalania)";
+   basis="Kalorie aktywne z Huawei + oszacowana spoczynkowa przemiana materii (BMR/24 h)";
   }else{fail("Wybierz sposób wpisania danych Huawei.");return;}
  }
  const proteinTarget=Math.round(weight*proteinPerKg);
@@ -118,27 +130,31 @@ form.addEventListener("submit",event=>{
  const foodEnergy=eggs*72+(meat/100)*food.kcal+(dairy/100)*100+(whey/100)*400+otherKcal;
  const balance=foodEnergy-expenditure;
  const complete=period==="complete";
- const target=complete?Math.round(expenditure*factor):null;
- const remaining=target===null?null:target-foodEnergy;
- text("resultModeLabel",complete?"Orientacyjny cel spożycia na pełny dzień":"Dzień w trakcie — bilans do obecnej chwili");
- text("energyResult",target===null?"Nie wyznaczono celu dobowego":nf.format(target)+" kcal");
+ // For an ongoing day this is a provisional full-day forecast: full-day BMR plus activity so far.
+ const target=Math.round(expenditure*factor);
+ const remaining=target-foodEnergy;
+ text("resultModeLabel",complete?"Orientacyjny cel spożycia na pełny dzień":"Wstępny cel na koniec dnia (prognoza)");
+ text("energyResult",nf.format(target)+" kcal");
  text("burnBasis",basis+(watch?" · Dane wpisane ręcznie":""));
+ $("watchBreakdown").hidden=!watch||activeBurn===null||restBurn===null;
+ if(activeBurn!==null)text("activeBurnResult",nf.format(activeBurn)+" kcal");
+ if(restBurn!==null)text("restBurnResult",nf.format(restBurn)+" kcal");
  text("burnResult",nf.format(expenditure)+" kcal");
- text("actualBalanceResult",(balance>0?"+":"")+nf.format(balance)+" kcal"+(balance<0?" (ujemny)":balance>0?" (dodatni)":" (zero)"));
+ text("actualBalanceResult",(balance>0?"+":"")+nf.format(balance)+" kcal"+(complete?(balance<0?" (ujemny)":balance>0?" (dodatni)":" (zero)"):" (prognoza)"));
  text("proteinResult",nf.format(proteinTarget)+" g");
  text("foodProteinResult",n1.format(foodProtein)+" g");
  text("foodEnergyResult",nf.format(foodEnergy)+" kcal");
- text("energyLeftResult",remaining===null?"— (dzień w trakcie)":(remaining>0?"+":"")+nf.format(remaining)+" kcal");
+ text("energyLeftResult",(remaining>0?"+":"")+nf.format(remaining)+" kcal"+(complete?"":" (prognoza)"));
  const missing=proteinTarget-foodProtein;
  text("proteinLeftResult",missing>0?"Brakuje ok. "+n1.format(missing)+" g do zadanego celu białka.":"Cel białka osiągnięty lub przekroczony o "+n1.format(Math.abs(missing))+" g.");
  const caveat="To szacunek. Poprawna ocena deficytu/nadwyżki wymaga wpisania całego spożycia z tego samego okresu oraz uwzględnienia błędów zegarka i etykiet.";
- text("calorieInfo",!complete?"Dzień jeszcze trwa: "+nf.format(expenditure)+" kcal to odczyt do obecnej chwili, a nie pełny wydatek dobowy. Bilansu nie interpretuj jako końcowego deficytu ani nadwyżki. "+caveat:
+ text("calorieInfo",!complete?"Dzień jeszcze trwa: "+nf.format(expenditure)+" kcal to wstępna prognoza spalania na koniec dnia, obliczona z pełnodobowego BMR i wpisanej aktywności dotychczas. Kolejne kroki, praca, trening oraz posiłki zmienią wynik. Nie traktuj go jako ostatecznego bilansu. "+caveat:
  (balance<0?"Z wpisanych danych wynika ujemny bilans (orientacyjny deficyt). ":balance>0?"Z wpisanych danych wynika dodatni bilans (orientacyjna nadwyżka). ":"Wpisana energia i wydatek są zbliżone. ")+caveat);
  text("bmrResult",nf.format(bmr)+" kcal");
  text("tdeeResult",nf.format(expenditure)+" kcal");
  $("calcError").hidden=true;
  $("calcResults").hidden=false;
- lastRecord={date:new Date().toLocaleDateString("pl-PL"),source:watch?"watch":"formula",weight,calories:target===null?Math.round(expenditure):target,protein:proteinTarget,foodProtein:Math.round(foodProtein),foodEnergy:Math.round(foodEnergy),balance:Math.round(balance),steps};
+ lastRecord={date:new Date().toLocaleDateString("pl-PL"),source:watch?"watch":"formula",weight,calories:target,protein:proteinTarget,foodProtein:Math.round(foodProtein),foodEnergy:Math.round(foodEnergy),balance:Math.round(balance),steps};
  $("saveResult").disabled=false;
  hasCalculated=true;
  $("saveInfo").textContent="";
