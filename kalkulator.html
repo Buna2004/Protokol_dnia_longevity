@@ -1,29 +1,29 @@
 <!doctype html>
 <html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kalkulator kalorii i białka + Huawei Watch | Polish Biohacker</title>
+<title>Kalkulator kalorii i białka + Smartwatch | Polish Biohacker</title>
 <meta name="description" content="Kalkulator zapotrzebowania na kalorie (Mifflin–St Jeor) i białko, zliczanie jaj, mięsa, serka i odżywki białkowej. Wyniki szacunkowe.">
 <meta name="theme-color" content="#060b09"><link rel="stylesheet" href="assets/site.css?v=20261115-4"></head>
 <body><header data-site-header></header>
 <main class="container">
-<section class="page-hero"><span class="eyebrow">Narzędzia Polish Biohacker</span><h1>Oblicz. Zrozum. <span class="accent">Dostosuj.</span></h1><p class="lead">Kalkulator energetyczny i białkowy w dwóch trybach: klasycznym i Huawei Watch. Sprawdź szacunkowy wydatek energii i bilans dnia, bez podwójnego liczenia aktywności.</p></section>
+<section class="page-hero"><span class="eyebrow">Narzędzia Polish Biohacker</span><h1>Oblicz. Zrozum. <span class="accent">Dostosuj.</span></h1><p class="lead">Kalkulator energetyczny i białkowy w dwóch trybach: klasycznym i z danymi ze smartwatcha. Sprawdź szacunkowy wydatek energii i bilans dnia, bez podwójnego liczenia aktywności.</p></section>
 <div class="grid-2" style="align-items:start;margin-bottom:60px">
 <div class="panel">
 <form id="calcForm" novalidate>
- <div class="watch-head"><span class="eyebrow">NOWOŚĆ · TRYB HUAWEI</span><h2 style="font-size:1.65rem;margin-bottom:9px">Dzienne spalanie z zegarka</h2>
- <p class="muted text-sm">Przepisz kalorie <strong>aktywne</strong> z tarczy Huawei (pierścień „W ruchu”). Kalkulator sam oszacuje kalorie spoczynkowe z masy, wzrostu, wieku i płci, a następnie doda obie wartości.</p></div>
+ <div class="watch-head"><span class="eyebrow">SMARTWATCH · KALORIE AKTYWNE</span><h2 style="font-size:1.65rem;margin-bottom:9px">Dzienne spalanie z zegarka</h2>
+ <p class="muted text-sm">Przepisz <strong>kalorie aktywne</strong> z dziennego podsumowania na zegarku (np. „Active”, „Move”, „W ruchu”). Kalkulator oszacuje kalorie spoczynkowe z masy, wzrostu, wieku i płci, a następnie zsumuje obie wartości.</p></div>
  <label class="field form-section">Tryb obliczeń
-   <select id="energyMode"><option value="watch" selected>Huawei Watch — wpisuję spalone kcal</option><option value="formula">Bez zegarka — wylicz z aktywności</option></select>
+   <select id="energyMode"><option value="watch" selected>Smartwatch — wpisuję kalorie aktywne</option><option value="formula">Bez zegarka — wylicz z aktywności</option></select>
  </label>
  <div id="watchPanel" class="panel watch-panel">
-  <span class="eyebrow">Huawei Watch GT 5 Pro Elite · pierścień „W ruchu”</span>
-  <p class="muted text-sm">Wpisz wartość <strong>aktywnych kcal</strong> z tarczy zegarka, z pierścienia „W ruchu”. Spoczynkowe oszacujemy automatycznie na podstawie profilu poniżej.</p>
+  <span class="eyebrow">Smartwatch · dane z aktywności</span>
+  <p class="muted text-sm">Wpisz dzienną wartość <strong>kalorii aktywnych</strong> widoczną na zegarku lub w jego aplikacji. Gdy urządzenie pokazuje kalorie <strong>całkowite</strong>, wybierz inny wariant poniżej, aby nie doliczać spoczynkowych ponownie.</p>
   <label class="field form-section">Który odczyt przepisujesz?
-   <select id="watchInputMode"><option value="active" selected>Kalorie „W ruchu” + oszacowane spoczynkowe</option><option value="total">Mam całkowite spalanie (Total / Burned)</option><option value="split">Mam osobno Resting i Active</option></select>
+   <select id="watchInputMode"><option value="active" selected>Kalorie aktywne + oszacowane spoczynkowe</option><option value="total">Mam całkowite spalanie (Total / Burned)</option><option value="split">Mam osobno Resting i Active</option></select>
   </label>
   <div class="field-grid">
    <label class="field" id="watchTotalField" hidden>Całkowite spalone kalorie (Total / Burned, kcal)<input id="watchTotal" type="number" min="300" max="15000" step="1" placeholder="np. 3350" inputmode="numeric"></label>
    <label class="field" id="watchRestField" hidden>Resting (kcal)<input id="watchRest" type="number" min="100" max="6000" step="1" placeholder="np. 1950" inputmode="numeric"></label>
-   <label class="field" id="watchActiveField">Kalorie aktywne z Huawei „W ruchu” (kcal)<input id="watchActive" type="number" min="0" max="10000" step="1" placeholder="np. 1400" inputmode="numeric"></label>
+   <label class="field" id="watchActiveField">Kalorie aktywne ze smartwatcha (kcal)<input id="watchActive" type="number" min="0" max="10000" step="1" placeholder="np. 1400" inputmode="numeric"></label>
    <label class="field">Liczba kroków (opcjonalnie, informacyjnie)<input id="watchSteps" type="number" min="0" max="100000" step="1" placeholder="np. 18000"><small>Do historii, nie do dodawania kalorii.</small></label>
    <label class="field">Okres pomiaru<select id="watchPeriod"><option value="partial" selected>Dzisiaj — dzień jeszcze trwa (prognoza)</option><option value="complete">Zakończony dzień (bilans dobowy)</option></select></label>
   </div>
@@ -78,5 +78,5 @@
 </div>
 </div>
 </main><footer data-site-footer></footer>
-<script src="assets/site.js" defer></script><script src="assets/calc.js?v=20261115-4" defer></script>
+<script src="assets/site.js" defer></script><script src="assets/calc.js?v=20261115-5" defer></script>
 </body></html>
