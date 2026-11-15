@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kalkulator kalorii i białka | Polish Biohacker</title>
+<meta name="description" content="Kalkulator zapotrzebowania na kalorie (Mifflin–St Jeor) i białko, zliczanie jaj, mięsa, serka i odżywki białkowej. Wyniki szacunkowe.">
+<meta name="theme-color" content="#060b09"><link rel="stylesheet" href="assets/site.css"></head>
+<body><header data-site-header></header>
+<main class="container">
+<section class="page-hero"><span class="eyebrow">Narzędzia Polish Biohacker</span><h1>Oblicz. Zrozum. <span class="accent">Dostosuj.</span></h1><p class="lead">Kalkulator energetyczny i białkowy w jednym miejscu. Mniej zgadywania, więcej świadomych założeń — bez udawania, że wzór zna dokładnie Twój metabolizm.</p></section>
+<div class="grid-2" style="align-items:start;margin-bottom:60px">
+<div class="panel">
+<h2 style="font-size:1.65rem">Twój profil</h2>
+<form id="calcForm" novalidate>
+ <div class="field-grid form-section">
+  <label class="field">Masa ciała (kg)<input id="weight" type="number" min="30" max="300" step=".1" placeholder="np. 90" required inputmode="decimal"></label>
+  <label class="field">Wzrost (cm)<input id="height" type="number" min="120" max="230" step="1" placeholder="np. 178" required inputmode="numeric"></label>
+  <label class="field">Wiek (lata)<input id="age" type="number" min="16" max="100" step="1" placeholder="np. 39" required inputmode="numeric"></label>
+  <label class="field">Płeć do wzoru BMR<select id="sex"><option value="male">Mężczyzna</option><option value="female">Kobieta</option></select><small>Wzór Mifflina–St Jeora stosuje dwa warianty.</small></label>
+  <label class="field">Aktywność łącznie z pracą<select id="activity"><option value="1.2">Siedzący tryb życia (×1,2)</option><option value="1.375">Lekka aktywność (×1,375)</option><option value="1.55" selected>Umiarkowana (×1,55)</option><option value="1.725">Wysoka (×1,725)</option><option value="1.9">Bardzo wysoka (×1,9)</option></select></label>
+  <label class="field">Cel<select id="goal"><option value="maintain">Utrzymanie (0%)</option><option value="cut">Redukcja (–15%)</option><option value="bulk">Budowa masy (+8%)</option><option value="longevity">Longevity (bez automatycznego deficytu)</option></select></label>
+  <label class="field">Białko (g/kg masy ciała)<input id="proteinFactor" type="number" min="1" max="3" step=".1" value="2.0" required><small>Wartość personalizowana; 2 g/kg nie jest wymogiem dla wszystkich.</small></label>
+ </div>
+ <hr class="divider">
+ <h2 style="font-size:1.65rem">Co dzisiaj zjadłeś?</h2>
+ <p class="muted text-sm">Podaj ilości lub wpisz zero. Wartości odżywcze są uśrednione — etykieta produktu ma pierwszeństwo.</p>
+ <div class="field-grid form-section">
+  <label class="field">Jajka (sztuki)<input id="eggs" type="number" min="0" max="50" step="1" value="0" required></label>
+  <label class="field">Mięso (gramy)<input id="meat" type="number" min="0" max="3000" step="1" value="0" required></label>
+  <label class="field">Rodzaj mięsa<select id="meatType"><option value="beefLean">Wołowina chuda, surowa</option><option value="beefFat">Wołowina tłustsza, surowa</option><option value="beefCooked">Wołowina po obróbce</option><option value="chicken">Pierś kurczaka, surowa</option><option value="pork">Wieprzowina, orientacyjnie</option></select></label>
+  <label class="field">Serek / twaróg (gramy)<input id="dairy" type="number" min="0" max="3000" step="1" value="0" required><small>W modelu: ~11 g białka i 100 kcal / 100 g.</small></label>
+  <label class="field">Odżywka whey (gramy proszku)<input id="whey" type="number" min="0" max="500" step="1" value="0" required><small>Model: ~80% białka, 400 kcal / 100 g proszku.</small></label>
+ </div>
+ <p class="notice">Nie uwzględniono innych produktów, sosów, napojów ani indywidualnych różnic w etykietach. To kalkulator przybliżony.</p>
+ <button class="btn btn-primary" type="submit" style="margin-top:18px;width:100%">Przelicz moje zapotrzebowanie →</button>
+ <p id="calcError" class="notice warning" role="alert" hidden></p>
+</form>
+</div>
+<div>
+ <section id="calcResults" class="panel calc-result" hidden aria-live="polite">
+  <span class="eyebrow">Twój szacunkowy cel dzienny</span>
+  <div id="energyResult" class="result-number"></div>
+  <dl><div><dt>Białko docelowe</dt><dd id="proteinResult"></dd></div><div><dt>Wpisane białko</dt><dd id="foodProteinResult"></dd></div><div><dt>Wpisana energia</dt><dd id="foodEnergyResult"></dd></div><div><dt>Różnica kcal</dt><dd id="energyLeftResult"></dd></div></dl>
+  <p id="proteinLeftResult"></p><p class="mini" id="calorieInfo"></p><hr class="divider">
+  <p class="mini">BMR według wzoru: <strong id="bmrResult"></strong>. TDEE przed modyfikacją celu: <strong id="tdeeResult"></strong>. BMR to nie całkowite dzienne zapotrzebowanie.</p>
+  <button id="saveResult" class="btn btn-secondary" type="button" disabled>Zapisz wynik na urządzeniu</button><p class="mini" id="saveInfo" role="status"></p>
+ </section>
+ <div class="panel" style="margin-top:18px"><span class="eyebrow">Historia lokalna</span><h3>Twoje ostatnie obliczenia</h3><p class="mini">Zapis jest dobrowolny i pozostaje wyłącznie w przeglądarce tego urządzenia. Dane nie są wysyłane do serwera ani do nas.</p><div id="history"></div><button id="clearHistory" class="btn btn-secondary" type="button">Wyczyść historię</button></div>
+ <div class="panel" style="margin-top:18px"><span class="eyebrow">Interpretacja</span><h3>Jak czytać wynik?</h3>
+ <ul class="info-list"><li>TDEE to punkt startowy. Najlepiej weryfikować go na podstawie trendu masy ciała i spożycia przez 2–4 tygodnie.</li><li>Współczynnik aktywności obejmuje również aktywną pracę — nie dodawaj jej drugi raz.</li><li>Dla osób ze znaczną otyłością, ciężkimi chorobami lub szczególnymi potrzebami żywieniowymi proste g/kg może być mylące.</li><li>Odpowiednie spożycie białka zależy od wieku, treningu, stanu zdrowia i całej diety.</li></ul>
+ </div>
+</div>
+</div>
+</main><footer data-site-footer></footer>
+<script src="assets/site.js" defer></script><script src="assets/calc.js" defer></script>
+</body></html>
