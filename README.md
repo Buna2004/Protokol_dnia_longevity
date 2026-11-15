@@ -1,92 +1,57 @@
-# 🧬 POLISH BIOHACKER – PROTOKÓŁ DNIA
+# Polish Biohacker — jedna platforma
 
-Oficjalna dokumentacja projektu **Polish Biohacker** autorstwa Grzegorza Buczka.  
-To nie jest poradnik medyczny ani gotowy plan suplementacyjny – to opis struktury mojego osobistego eksperymentu z długowiecznością, wydolnością i optymalizacją biologii człowieka.
+Nowoczesna, responsywna strona Polish Biohacker zbudowana jako lekka, statyczna witryna możliwa do publikacji na GitHub Pages.
 
----
+## Nawigacja
 
-## 🎯 Czym jest ten projekt?
+- `index.html` — nowa strona główna z fotografią autora.
+- `kalkulator.html` — połączony kalkulator energii, białka i spożycia posiłków.
+- `protokol.html` — osobisty protokół dnia (rano / trening / sen).
+- `bloodwork.html` — archiwalne badania krwi z 15.09.2025.
+- `scany.html` — zachowane skany źródłowe.
+- `trening.html` — aktualizacja treningu (listopad 2026).
+- `performance.html` — archiwum HYROX.
+- `mito.html` — koncepcja MITO MORNING, formularz Formspree.
+- `dziekuje.html` — potwierdzenie przesłania formularza.
+- `assets/site.css` — centralny responsywny design system.
+- `assets/site.js` — wspólne menu i stopka.
+- `assets/calc.js` — logika kalkulatora z zapisem opcjonalnym wyłącznie na urządzeniu.
 
-Polish Biohacker to długoterminowy eksperyment oparty na:
-- realnych badaniach krwi,
-- świadomym zarządzaniu rytmem dobowym,
-- treningu o wysokiej intensywności,
-- biohackingu jako systemie, nie modzie.
+Nie potrzebujesz bundlera, Node.js ani serwera aplikacyjnego. Otwórz `index.html` w przeglądarce lub włącz GitHub Pages dla gałęzi `main` i folderu `/` po zaakceptowaniu zmian.
 
-W internecie pokazuję **strukturę i filozofię**,  
-a szczegóły (substancje, dawki, pełny protokół) zostaną opisane w przygotowywanej książce.
+## Kalkulator — założenia
 
----
+- BMR według równania Mifflina–St Jeora; TDEE = BMR × współczynnik aktywności.
+- Aktywność obejmuje też pracę fizyczną, aby uniknąć podwójnego dodawania kalorii.
+- Redukcja: –15%; nadwyżka: +8%; utrzymanie i „longevity”: bez automatycznej korekty.
+- Białko: regulowany mnożnik g/kg masy ciała.
+- Jaja, mięso, serek i whey: wartości uśrednione. Rzeczywiste wartości należy odczytać z opakowań; w przyszłości można dodać edycję produktów.
+- Historia obliczeń: `localStorage`, tylko po kliknięciu „Zapisz wynik”, z opcją usunięcia.
+- Wartości są edukacyjnymi estymacjami, nie indywidualną poradą żywieniową.
 
-## 🧠 Struktura Protokołu Dnia
+## MITO MORNING — przed uruchomieniem kampanii
 
-System opiera się na trzech kluczowych fazach:
+Formularz zachowuje dotychczasowy endpoint Formspree (`https://formspree.io/f/xkovanpj`). Należy sprawdzić:
+1. Czy endpoint nadal należy do projektu i faktycznie odbiera zgłoszenia.
+2. Czy podane są pełne informacje o administratorze danych, celu, okresie przechowywania, prawach i sposobie kontaktu; obecny zwięzły komunikat **nie zastępuje pełnej informacji RODO**.
+3. Czy projekt ma zatwierdzoną recepturę, odpowiednie oświadczenia marketingowe oraz ustalone warunki ewentualnej sprzedaży.
+4. Czy na skanach badań nie ma danych osobowych wymagających usunięcia.
 
-### 1️⃣ Rano na czczo – AKTYWACJA
-- uruchomienie mitochondriów  
-- reset dopaminy  
-- naturalne pobudzenie osi HPA  
-- przygotowanie do dnia bez cukrowych stymulantów
+Usunięto wpisany na sztywno, pozornie „aktualny” licznik zapisów. Strona nie obiecuje daty premiery ani skuteczności produktu.
 
-### 2️⃣ Przed treningiem – PERFORMANCE
-- maksymalizacja wydolności  
-- koncentracja i fokus  
-- ochrona mięśni i stawów  
-- stabilna energia bez „zjazdu”
+## Wizualne i manualne testy przed publikacją
 
-### 3️⃣ Na sen – REGENERACJA
-- wyciszenie układu nerwowego  
-- poprawa jakości snu  
-- nocne procesy naprawcze  
-- balans hormonalny
+- Nawigacja desktop/mobile oraz klawiatura.
+- Obliczenia dla skrajnych i zwykłych danych; liczby ujemne i puste pola.
+- Zapis i usuwanie historii w różnych przeglądarkach.
+- Widok na telefonie, tablecie i komputerze.
+- Ładowanie zdjęcia `assets/founder.jpg` i pozostałych obrazów.
+- Formularz MITO: poprawny e-mail, zgoda, potwierdzenie, błąd sieci.
+- Skany: kontrola anonimizacji danych osobowych.
+- Sprawdzenie opublikowanych treści przez autora.
 
-Pełny opis każdej fazy znajduje się na stronie:
-👉 **Protokół dnia**  
-`index.html`
+## Zasady publikacji
 
----
+Strona dokumentuje doświadczenia jednej osoby. To nie są wyniki badań klinicznych ani instrukcje dawkowania. Wiadomości zdrowotne powinny być weryfikowane przed publicznym wykorzystaniem.
 
-## 🩸 Badania krwi
-
-Publicznie udostępniam swoje realne wyniki badań jako punkt odniesienia dla tego systemu.  
-To nie są normy ani zalecenia – tylko dokumentacja procesu.
-
-👉 Badania krwi:  
-`bloodwork.html`
-
----
-
-## 📚 Dlaczego bez listy substancji?
-
-- ten protokół jest ustawiony pod moje wyniki i styl życia  
-- kopiowanie go 1:1 przez inne osoby byłoby nieodpowiedzialne  
-- chcę pokazać proces, nie „gotową receptę”
-
-Pełna lista oraz logika ich doboru zostanie ujawniona w książce:
-**„Polish Biohacker – Kulisy transformacji”** *(tytuł roboczy)*
-
----
-
-## ⚠️ Ważne
-
-Ten projekt ma charakter:
-- dokumentacyjny  
-- edukacyjny  
-- eksperymentalny  
-
-Nie stanowi porady medycznej ani zachęty do naśladowania.
-
----
-
-## 🔗 Polish Biohacker w sieci
-
-- TikTok / Instagram / YouTube: Polish Biohacker  
-- Linktree: centrum zasobów i projektów
-
----
-
-> Człowiek to nie maszyna.  
-> Ale może nauczyć się zarządzać swoim systemem operacyjnym.
-
-**Polish Biohacker**  
-Grzegorz Buczek
+**© Polish Biohacker**
