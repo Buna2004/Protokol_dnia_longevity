@@ -27,13 +27,13 @@ Nie potrzebujesz bundlera, Node.js ani serwera aplikacyjnego. Otwórz `index.htm
 - Białko: regulowany mnożnik g/kg masy ciała.
 - Jaja, mięso, serek i whey: wartości uśrednione. Rzeczywiste wartości należy odczytać z opakowań; w przyszłości można dodać edycję produktów.
 - Historia obliczeń: `localStorage`, tylko po kliknięciu „Zapisz wynik”, z opcją usunięcia.
-- Tryb **Huawei Watch**: ręcznie przepisane całkowite spalone kcal „Burned / Total” albo „Resting + Active” z aplikacji Stay Fit. Nie sumuj kroków, pracy ani treningu ponownie.
-- Opcjonalny wariant: same kalorie „Active” + szacunkowe BMR (jedynie dla ukończonego dnia — mniej dokładny).
-- Tryb „dzień w trakcie” nie podaje celu na pełną dobę; pokazuje jedynie bilans dotychczasowy.
+- Tryb **Smartwatch**: domyślnie wpisz kalorie aktywne z dowolnego zegarka, a kalkulator doliczy oszacowany BMR; alternatywnie można podać całkowite spalone kcal albo osobno spoczynkowe i aktywne. Nie sumuj kroków, pracy ani treningu ponownie.
+- Tryb aktywnych kcal + oszacowany BMR służy zarówno do analizy zakończonego dnia, jak i do wstępnej prognozy dla dnia trwającego (bez przyszłej aktywności).
+- Tryb „dzień w trakcie” pokazuje prognozę z pełnodobowego BMR i aktywności wykonanej do chwili wpisu — to nie ostateczny wynik dobowy.
 - Bilans = energia spożyta (z uzupełnionych produktów) minus energia spalona. Wynik nie reprezentuje pełnego deficytu, jeśli użytkownik nie wprowadził całej żywności lub wydatek jest niedoszacowany.
 - Dodatkowe pola „Inne jedzenie i napoje” pozwalają uzupełnić kalorie i białko spoza jaj, mięsa, serka oraz whey.
 - Kroki są informacją pomocniczą i mogą być przechowane w lokalnej historii; nie zamieniamy ich ponownie na kcal.
-- Brak integracji z kontem Huawei. Strona GitHub Pages nie pobiera danych zegarka automatycznie.
+- Brak integracji z kontem producenta zegarka. Strona GitHub Pages nie pobiera danych automatycznie.
 
 - Wartości są edukacyjnymi estymacjami, nie indywidualną poradą żywieniową.
 
